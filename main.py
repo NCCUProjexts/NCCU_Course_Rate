@@ -18,10 +18,10 @@ def course_rate(param, year_sem, course_id, name, teacher):
         # Initialize folder if not exist
         if not os.path.exists("./result/" + teacher):
             os.makedirs("./result/" + teacher)
-            if not os.path.exists("./result/" + teacher):
-                os.makedirs("./result/" + teacher + "/" + name)
-                with open("./result/" + teacher + "/" + name + "/index.json", 'a+') as f:
-                    json.dump(list(), f)
+        if not os.path.exists("./result/" + teacher + "/" + name):
+            os.makedirs("./result/" + teacher + "/" + name)
+            with open("./result/" + teacher + "/" + name + "/index.json", 'a+') as f:
+                json.dump(list(), f)
                 
         # Read exist data
         course_index = list()
