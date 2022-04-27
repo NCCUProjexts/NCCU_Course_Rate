@@ -16,23 +16,25 @@ def course_rate(param, year_sem, course_id, name, teacher):
             comments.append(row.find('td').text)
         
         # Initialize folder if not exist
-        if not os.path.exists("./result/" + teacher + "_" + name):
-            os.makedirs("./result/" + teacher + "_" + name)
-            with open("./result/" + teacher + "_" + name + "/index.json", 'a+') as f:
-                json.dump(list(), f)
+        if not os.path.exists("./result/" + teacher):
+            os.makedirs("./result/" + teacher)
+            if not os.path.exists("./result/" + teacher):
+                os.makedirs("./result/" + teacher + "/" + name)
+                with open("./result/" + teacher + "/" + name + "/index.json", 'a+') as f:
+                    json.dump(list(), f)
                 
         # Read exist data
         course_index = list()
-        with open("./result/" + teacher + "_" + name + "/index.json", 'r') as f:
+        with open("./result/" + teacher + "/" + name + "/index.json", 'r') as f:
             course_index = json.loads(f.read())
         
         # Add this index
         course_index.append(dict({"yesr_sem": year_sem, "course_id": course_id}))
         
-        with open("./result/" + teacher + "_" + name + "/index.json", 'w') as f:
+        with open("./result/" + teacher + "/" + name + "/index.json", 'w') as f:
             json.dump(course_index, f)
         
-        with open("./result/" + teacher + "_" + name + "/" + year_sem + "_" + course_id + ".json", 'a+') as f:
+        with open("./result/" + teacher + "/" + name + "/" + year_sem + "_" + course_id + ".json", 'a+') as f:
             json.dump(comments, f)
     except:
         print("Course Page not found or Parse error")
