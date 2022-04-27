@@ -29,7 +29,7 @@ def course_rate(param, year_sem, course_id, name, teacher):
             course_index = json.loads(f.read())
         
         # Add this index
-        course_index.append(dict({"yesr_sem": year_sem, "course_id": course_id}))
+        course_index.append(dict({"year_sem": year_sem, "course_id": course_id}))
         
         with open("./result/" + teacher + "/" + name + "/index.json", 'w') as f:
             json.dump(course_index, f)
